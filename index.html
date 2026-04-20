@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Infografía JOIN | Northwind + Pubs · Git Workflow</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #eef2f8 0%, #dfe7ef 100%);
+      font-family: 'Inter', sans-serif;
+      padding: 40px 24px;
+      color: #132e3c;
+    }
+
+    .infografia {
+      max-width: 1300px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 2rem;
+      box-shadow: 0 30px 45px -15px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    /* Cabecera */
+    .hero {
+      background: linear-gradient(115deg, #0b2f3b 0%, #1c6d8f 100%);
+      padding: 1.8rem 2.2rem;
+      color: white;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .hero h1 i {
+      background: #FFB347;
+      padding: 10px;
+      border-radius: 50px;
+      color: #0b2f3b;
+      font-size: 1.7rem;
+    }
+    .hero .sub {
+      margin-top: 10px;
+      border-left: 4px solid #FFB347;
+      padding-left: 18px;
+      font-weight: 400;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    .equipo {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      background: rgba(255,255,240,0.1);
+      padding: 10px 20px;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* Grid dos columnas */
+    .grid-dos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-bottom: 1px solid #e2eef4;
+    }
+    .db-panel {
+      padding: 1.8rem 1.8rem;
+    }
+    .db-panel:first-child {
+      border-right: 1px solid #e0edf3;
+      background: #FEFEFC;
+    }
+    .db-panel:last-child {
+      background: #FCFEFE;
+    }
+    .db-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px dashed #cbdde6;
+      padding-bottom: 10px;
+    }
+    .db-header i {
+      font-size: 2rem;
+      background: #eef2f5;
+      padding: 8px;
+      border-radius: 20px;
+      color: #1c6d8f;
+    }
+    .db-header h2 {
+      font-weight: 800;
+      font-size: 1.7rem;
+      color: #155f7a;
+    }
+    .stats-tag {
+      background: #eef3f7;
+      border-radius: 40px;
+      padding: 4px 14px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 1.2rem;
+    }
+    /* lista de procesos tipo grid */
+    .procesos-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .proc-item {
+      background: white;
+      border-radius: 1rem;
+      padding: 0.7rem 1rem;
+      border: 1px solid #e9f0f5;
+      transition: 0.2s;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .proc-item:hover {
+      border-color: #FFB347aa;
+      box-shadow: 0 6px 12px -8px rgba(0,0,0,0.1);
+    }
+    .proc-num {
+      background: #FFB34720;
+      color: #c46f0a;
+      font-weight: 800;
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 30px;
+      font-size: 0.8rem;
+    }
+    .proc-info {
+      flex: 1;
+    }
+    .proc-titulo {
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .join-type {
+      font-family: monospace;
+      background: #eef2f5;
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      border-radius: 30px;
+      font-weight: 600;
+      color: #1f6e8c;
+    }
+    .proc-contexto {
+      font-size: 0.73rem;
+      color: #2c5b6e;
+      margin-top: 4px;
+      line-height: 1.3;
+    }
+
+    .extra-joins {
+      background: #FFF6E8;
+      border-radius: 1rem;
+      padding: 1rem 1.2rem;
+      margin-top: 1.5rem;
+      border-left: 5px solid #FFB347;
+    }
+    .extra-joins p {
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    /* SECCIÓN GIT ESPACIOS */
+    .git-block {
+      background: #0A262F;
+      background-image: linear-gradient(135deg, #0a2c38, #134b5e);
+      padding: 1.8rem 2rem;
+      color: white;
+    }
+    .git-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .git-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 1rem 0;
+    }
+    .git-card {
+      background: rgba(255,255,240,0.08);
+      backdrop-filter: blur(2px);
+      border-radius: 1.2rem;
+      padding: 1rem;
+      flex: 1;
+      border: 1px solid #FFB34760;
+    }
+    .git-card i {
+      font-size: 1.6rem;
+      color: #FFB347;
+      margin-bottom: 8px;
+    }
+    .git-link-space {
+      background: #05202b;
+      padding: 8px 12px;
+      border-radius: 40px;
+      font-family: monospace;
+      font-size: 0.7rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+    }
+    .btn-copy {
+      background: none;
+      border: none;
+      color: #FFB347;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .footer-ref {
+      background: #EFF4F9;
+      padding: 0.8rem 2rem;
+      font-size: 0.7rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      color: #1a4e64;
+    }
+    @media (max-width: 800px) {
+      .grid-dos {
+        grid-template-columns: 1fr;
+      }
+      .db-panel:first-child {
+        border-right: 0;
+        border-bottom: 1px solid #e0edf3;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="infografia">
+  <div class="hero">
+    <h1><i class="fas fa-code-branch"></i> Taller 2.2 · JOIN</h1>
+    <div class="sub">Análisis de negocio con INNER JOIN, LEFT JOIN y RIGHT JOIN — Northwind (ventas) + Pubs (editorial)</div>
+    <div class="equipo">
+      <span><i class="fas fa-users"></i> Los Dog Chamos 2.0 · Andia, Mamani, Pancca, Ramos</span>
+      <span><i class="fas fa-chalkboard"></i> Docente: Hugo Espetia Huamanga</span>
+      <span><i class="fab fa-microsoft"></i> Microsoft Sample DBs</span>
+    </div>
+  </div>
+
+  <div class="grid-dos">
+    <!-- NORTHWIND: 8 INNER JOIN + LEFT/RIGHT -->
+    <div class="db-panel">
+      <div class="db-header">
+        <i class="fas fa-ship"></i>
+        <h2>🌊 Northwind</h2>
+      </div>
+      <div class="stats-tag"><i class="fas fa-chart-line"></i> 8 INNER JOIN · 1 LEFT · 1 RIGHT</div>
+      <div class="procesos-grid">
+        <div class="proc-item"><div class="proc-num">1</div><div class="proc-info"><div class="proc-titulo">Pedidos con cliente y empleado <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Muestra órdenes junto al nombre del cliente y el empleado que gestionó la venta.</div></div></div>
+        <div class="proc-item"><div class="proc-num">2</div><div class="proc-info"><div class="proc-titulo">Detalle específico de pedido <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Lista productos, precios y descuentos para un OrderID concreto.</div></div></div>
+        <div class="proc-item"><div class="proc-num">3</div><div class="proc-info"><div class="proc-titulo">Empleados con su jefe (Self-Join) <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Jerarquía interna: cada empleado muestra a quién reporta.</div></div></div>
+        <div class="proc-item"><div class="proc-num">4</div><div class="proc-info"><div class="proc-titulo">Pedidos + Transportista <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Nombre de la empresa de envío (Federal Shipping, Speedy Express).</div></div></div>
+        <div class="proc-item"><div class="proc-num">5</div><div class="proc-info"><div class="proc-titulo">Productos que han sido pedidos <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Evita productos sin ventas, solo aquellos con movimiento.</div></div></div>
+        <div class="proc-item"><div class="proc-num">6</div><div class="proc-info"><div class="proc-titulo">Territorios asignados por empleado <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Región y descripción del territorio para cada vendedor.</div></div></div>
+        <div class="proc-item"><div class="proc-num">7</div><div class="proc-info"><div class="proc-titulo">Filtro por ShipperID (transporte) <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Consulta opcional para listar pedidos según transportista.</div></div></div>
+        <div class="proc-item"><div class="proc-num">8</div><div class="proc-info"><div class="proc-titulo">Empleados y territorios (detalle) <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Relación completa de empleados con sus territorios asignados.</div></div></div>
+      </div>
+      <div class="extra-joins">
+        <p><i class="fas fa-arrow-left"></i> <strong>LEFT JOIN (Clientes sin pedidos)</strong><br>Detecta clientes inactivos: PARIS spécialités, FISSA — nunca realizaron un pedido.</p>
+        <p><i class="fas fa-arrow-right"></i> <strong>RIGHT JOIN (Productos nunca pedidos)</strong><br>Inventario muerto: productos que no aparecen en ningún detalle de orden.</p>
+      </div>
+    </div>
+
+    <!-- PUBS: 8 INNER JOIN + LEFT/RIGHT -->
+    <div class="db-panel">
+      <div class="db-header">
+        <i class="fas fa-book-open"></i>
+        <h2>📚 Pubs (Editorial)</h2>
+      </div>
+      <div class="stats-tag"><i class="fas fa-chart-simple"></i> 8 INNER JOIN · 1 LEFT · 1 RIGHT</div>
+      <div class="procesos-grid">
+        <div class="proc-item"><div class="proc-num">1</div><div class="proc-info"><div class="proc-titulo">Ingresos estimados por libro <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Cálculo (ventas × precio) para conocer rentabilidad de cada título.</div></div></div>
+        <div class="proc-item"><div class="proc-num">2</div><div class="proc-info"><div class="proc-titulo">Libros más rentables <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Ranking: "Is Anger the Enemy?" ($1182.60) lidera ingresos.</div></div></div>
+        <div class="proc-item"><div class="proc-num">3</div><div class="proc-info"><div class="proc-titulo">Clientes (tiendas) que más compran <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Barnum's es el top con $1821.25 en compras.</div></div></div>
+        <div class="proc-item"><div class="proc-num">4</div><div class="proc-info"><div class="proc-titulo">Autores con mayor cantidad de libros <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Mide productividad de autores según número de títulos publicados.</div></div></div>
+        <div class="proc-item"><div class="proc-num">5</div><div class="proc-info"><div class="proc-titulo">Libros por editorial con ingresos <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Rendimiento económico desagregado por cada casa editorial.</div></div></div>
+        <div class="proc-item"><div class="proc-num">6</div><div class="proc-info"><div class="proc-titulo">Top 3 libros más vendidos (cantidad) <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Ranking comercial: mayor número de unidades vendidas.</div></div></div>
+        <div class="proc-item"><div class="proc-num">7</div><div class="proc-info"><div class="proc-titulo">Autores que generan más ingresos <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Albert Ringer ($1357.60) y Anne Ringer ($1302.20) son los más rentables.</div></div></div>
+        <div class="proc-item"><div class="proc-num">8</div><div class="proc-info"><div class="proc-titulo">Relación título-editorial-detalle ventas <span class="join-type">INNER JOIN</span></div><div class="proc-contexto">Análisis cruzado para estrategia de regalías.</div></div></div>
+      </div>
+      <div class="extra-joins">
+        <p><i class="fas fa-arrow-left"></i> <strong>LEFT JOIN (Libros sin movimiento / Autores sin publicaciones)</strong><br>Identifica "inventario muerto editorial" y autores que nunca han publicado un libro.</p>
+        <p><i class="fas fa-arrow-right"></i> <strong>RIGHT JOIN (Tiendas sin compras / Editoriales sin ventas)</strong><br>Explora entidades sin relación comercial, optimizando catálogo.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESPACIO PARA CONEXIONES GIT (final de página) -->
+  <div class="git-block">
+    <div class="git-title">
+      <i class="fab fa-git-alt"></i> Control de versiones · Git & GitHub
+      <i class="fas fa-code-branch"></i>
+    </div>
+    <div class="git-cards">
+      <div class="git-card">
+        <i class="fab fa-github"></i>
+        <h4>Repositorio oficial</h4>
+        <div class="git-link-space" id="repoArea">
+          <span id="repoText">https://github.com/LosDogChamos/Taller-2.2.-Join</span>
+          <button class="btn-copy" onclick="copiarTexto('repoText')"><i class="far fa-copy"></i></button>
+        </div>
+        <div style="font-size:0.7rem; margin-top:8px;"><i class="fas fa-history"></i> Commits por cada JOIN + evidencias</div>
+      <div class="git-card">
+        <i class="fas fa-network-wired"></i>
+        <h4>Conexiones Git</h4>
+        <div class="git-link-space">
+          <span>🌿 Rama principal: main · feature/joins</span>
+        </div>
+        <div class="git-link-space">
+          <span>🔗 URL clonación rápida</span>
+          <button class="btn-copy" onclick="copiarTextoSimple('git clone https://github.com/LosDogChamos/Taller-2.2.-Join.git')"><i class="far fa-copy"></i></button>
+        </div>
+      </div>
+    </div>
+  <div class="footer-ref">
+    <div><i class="fas fa-database"></i> Northwind & Pubs · Microsoft sample databases</div>
+    <div><i class="fas fa-file-alt"></i> LosDogChamos (2026) Taller 2.2 JOIN · GitHub</div>
+    <div><i class="fab fa-github"></i> https://github.com/LosDogChamos/Taller-2.2.-Join</div>
+  </div>
+</div>
+
+<script>
+  function copiarTexto(elementId) {
+    const texto = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(texto).then(() => {
+      mostrarToast("✅ Copiado: " + texto.substring(0, 45));
+    }).catch(() => alert("Copia manual"));
+  }
+  function copiarTextoSimple(texto) {
+    navigator.clipboard.writeText(texto).then(() => {
+      mostrarToast("📋 Copiado: " + texto.substring(0, 50));
+    }).catch(() => alert("Copia manual"));
+  }
+  function mostrarToast(msg) {
+    let toast = document.createElement('div');
+    toast.innerText = msg;
+    toast.style.position = 'fixed';
+    toast.style.bottom = '20px';
+    toast.style.left = '50%';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.backgroundColor = '#0A2F3F';
+    toast.style.color = '#FFB347';
+    toast.style.padding = '10px 20px';
+    toast.style.borderRadius = '40px';
+    toast.style.fontSize = '0.8rem';
+    toast.style.fontWeight = 'bold';
+    toast.style.zIndex = '9999';
+    toast.style.fontFamily = 'monospace';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 1800);
+  }
+</script>
+</body>
+</html>
